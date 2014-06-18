@@ -1,13 +1,7 @@
-<%= form_for @gallery, url: "/galleries/#{@gallery.id}" do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<%= form_for @gallery do |form| %>
+  <%= render "error_messages", target: @gallery %>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+  <%= render "form", form: form %>
 
   <div>
     <%= form.submit "Update gallery" %>
