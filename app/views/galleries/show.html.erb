@@ -5,6 +5,7 @@
 <% @gallery.images.each do |image| %>
   <%= image_tag image.url %>
   <%= link_to "Edit this image", [:edit, @gallery, image] %>
+  Created <%= time_ago_in_words image.created_at %> ago
 <% end %>
 
 <% if current_user.id == @gallery.user_id %>
