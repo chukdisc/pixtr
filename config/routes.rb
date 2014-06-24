@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :galleries, only: [:show, :new, :create, :edit, :update, :destroy] do
     resources :images, only: [:new, :create, :edit, :update]
   end
+  resources :groups, only: [:new, :create]
 end
