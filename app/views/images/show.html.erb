@@ -1,7 +1,12 @@
 <%= image_tag @image.url %>
+
 <%= form_for @image do |form| %>
   <div>
-    <%= form.collection_check_boxes 
+    <%= form.label "Groups" %>
+    <%= form.collection_check_boxes :group_ids, @groups, :id, :name %>
+  </div>
+  <div>
+    <%= form.submit "Update groups" %>
   </div>
 <% end %>
 

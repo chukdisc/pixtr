@@ -11,4 +11,12 @@ class User < ActiveRecord::Base
   def member?(group)
     groups.include?(group)
   end
+
+  def join
+    groups << group
+  end
+
+  def leave
+    groups.destroy(group)
+  end
 end

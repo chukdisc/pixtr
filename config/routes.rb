@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:new, :create, :index] do
     resource :group_membership, only: [:create, :destroy]
   end
+  resources :images, only: [:show, :edit, :update] do
+    resources :comments, only: [:create]
+  end
 end

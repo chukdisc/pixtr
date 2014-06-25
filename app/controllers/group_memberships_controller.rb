@@ -6,7 +6,7 @@ end
 
 def destroy
   group = current_user.group_memberships.find_by(group_id: params[:group_id])
-  group.destroy
+  current_user.leave group
   redirect_to :groups
 end
 end
