@@ -1,8 +1,18 @@
-<h1>Groups!</h1>
-
+<h1>Groups!</h1> <h3>Groups I belong to:</h3>
 <ul>
+  <% @groups.each do |group| %>
+    <% if current_user.member?(group) %>
+      <%= render group %><%= button_to "Leave group", [group, :group_membership], method: :delete %>
+    <% end %>
+  <% end %>
+</ul>
+<ul>
+  <h3>All the groups:</h3>
 <% @groups.each do |group| %>
-
-  <li><%= group.name %> // <%= group.description %></li
+  <%= render group %>
+  <% if ! current_user.member?(group) %>
+    <%= button_to "Join this group!", [group, :group_membership] %>
+  <% end %>
+    </li>
 <% end %>
 </ul>
