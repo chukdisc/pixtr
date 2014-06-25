@@ -40,6 +40,6 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:url, group_ids: [])
+    params.require(:image).permit(:url, group_ids: []).merge(gallery_id: params[:gallery_id])
   end
 end
