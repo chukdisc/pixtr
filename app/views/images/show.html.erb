@@ -1,34 +1,32 @@
+<div>
 <%= image_tag @image.url %>
-
-<%= form_for @image do |form| %>
-  <div>
-  <%= form.label "Groups" %>
-  <%= form.collection_check_boxes :group_ids, @groups, :id, :name %>
-</div>
-<div>
-  <%= form.submit "Update groups" %>
-</div>
-<% end %>
-
-<% if current_user.like?(@image) %>
-  <p>You like this image!</p>
-  <%= button_to "Un-Like!", [@image, :like], method: :delete %>
-<% else %>
-  <%= button_to "Like!", [@image, :like] %>
-<% end %>
-
-<%= form_for [@image, @comment] do |form| %>
-  <%= render "error_messages", target: @comment %>
-
-<div>
-  <%= form.label :body %>
-  <%= form.text_area :body %>
 </div>
 
 <div>
-  <%= form.submit "Comment" %>
+  <%= form_for @image do |form| %>
+    <%= form.label "Groups" %>
+    <%= form.collection_check_boxes :group_ids, @groups, :id, :name %>
+    <%= form.submit "Update groups" %>
+  <% end %>
 </div>
-<% end %>
+
+<div>
+  <% if current_user.like?(@image) %>
+    <%= button_to "Un-Like!", [@image, :like], method: :delete %>
+  <% else %>
+    <%= button_to "Like!", [@image, :like] %>
+  <% end %>
+  <%= @image.likes.count %> likes.
+</div>
+
+<div>
+  <%= form_for [@image, @comment] do |form| %>
+    <%= render "error_messages", target: @comment %>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+    <%= form.submit "Comment" %>
+  <% end %>
+</div>
 
 <ul>
   <% @comments.each do |comment| %>

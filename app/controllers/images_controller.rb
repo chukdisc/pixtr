@@ -23,15 +23,18 @@ class ImagesController < ApplicationController
   end
 
   def edit
-    @gallery = current_user.galleries.find(params[:gallery_id])
-    @image = @gallery.images.find(params[:id])
+    @image = current_user.images.find(params[:id])
+    @tag = Tag.new
+    @tags = Tag.all
   end
 
   def update
     @image = current_user.images.find(params[:id])
+    @tags = Tag.all
+    @tag = Tag.new
 
     if @image.update(image_params)
-      redirect_to @image
+      redirect_to [:edit, @image]
     else
       render :edit
     end
@@ -40,6 +43,6 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:url, group_ids: []).merge(gallery_id: params[:gallery_id])
+    params.require(:image).permit(:url, :tags, tag_ids: [], group_ids: [])
   end
 end
